@@ -1,0 +1,7 @@
+name: ActivaBetterInterface
+version: '${project.version}'
+main: com.me.dami.activabetterinterface.ActivaBetterInterface
+api-version: 1.19
+prefix: BetterInterface
+authors: [ gewoondami60 ]
+description: activa better guis implemented by dami
