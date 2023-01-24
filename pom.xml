@@ -62,6 +62,12 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
+
+        <!-- UltimateKingdom -->
+        <repository>
+            <id>recoreh-repo</id>
+            <url>https://git.recorehosting.com/maven/snapshots/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -69,6 +75,14 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.19.3-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- UltimateKingdom -->
+        <dependency>
+            <groupId>me.map</groupId>
+            <artifactId>ultimatekingdom</artifactId>
+            <version>0.38.9-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
