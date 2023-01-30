@@ -11,8 +11,7 @@ public class ThropyCommand implements ICommand {
         return false;
     }
 
-
-    public void Action() {
+    public void Action(Player _p, String _player) {
 
     }
 
