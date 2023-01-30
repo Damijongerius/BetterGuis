@@ -1,9 +1,6 @@
 package com.me.dami.activabetterinterface.Thropees;
 
-import com.me.dami.activabetterinterface.Base.Thropee;
-import me.map.ultimatekingdom.API.UltimateKingdom;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
+import com.me.dami.activabetterinterface.Base.Trophy;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -15,12 +12,12 @@ import java.util.UUID;
  */
 public class ThropeeManager{
 
-    private static Map<UUID, List<Thropee>> playerTrophies = new LinkedHashMap<>();
-    private static Map<String, List<Thropee>> KingdomTrophies = new LinkedHashMap<>();
-    private static Map<Integer, Thropee> trophies = new LinkedHashMap<>();
+    private static Map<UUID, List<Trophy>> playerTrophies = new LinkedHashMap<>();
+    private static Map<String, List<Trophy>> KingdomTrophies = new LinkedHashMap<>();
+    private static Map<Integer, Trophy> trophies = new LinkedHashMap<>();
 
 
-    public static List<Thropee> GetTrophies(){
+    public static List<Trophy> GetTrophies(){
 
         return null;
     }

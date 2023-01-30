@@ -6,7 +6,6 @@ public final class ActivaBetterInterface extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
 
     }
 }

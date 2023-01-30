@@ -1,4 +1,4 @@
 package com.me.dami.activabetterinterface.Base;
 
-public class Thropee {
+public class Trophy {
 }
