@@ -3,7 +3,6 @@ package com.me.dami.activabetterinterface;
 import com.me.dami.activabetterinterface.Commands.CommandManager;
 import com.me.dami.activabetterinterface.GUI.GUIManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.checkerframework.checker.units.qual.C;
 
 public final class ActivaBetterInterface extends JavaPlugin {
 
