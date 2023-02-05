@@ -19,7 +19,9 @@ public class PlayerInfoGUI implements IOpenGui {
     private int[] spacing = {0,1,2,3,4,5,6,7,8,9,11,17,18,19,20,21,22,23,24,25,26,27};
 
     public void OpenInventory(Inventory _inv, Player _p) {
+        //should be set playtime when accessable
 
+        _p.openInventory(_inv);
     }
 
     public Inventory OpenInventory(Player _p, String _object) {
@@ -34,6 +36,9 @@ public class PlayerInfoGUI implements IOpenGui {
 
         inv.setItem(12, SetKingdom(Bukkit.getPlayer(_object)));
 
+        //should be set playtime when accessable
+
+        _p.openInventory(inv);
         return inv;
     }
 
