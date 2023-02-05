@@ -9,8 +9,6 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.units.qual.K;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,7 @@ public class CommandManager implements TabExecutor {
     private ThropyCommand thropyCommand = new ThropyCommand();
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(CommandSender sender,Command command,String label, String[] args) {
 
         if(!(sender instanceof Player && sender instanceof ConsoleCommandSender)){
             return false;
@@ -40,14 +38,13 @@ public class CommandManager implements TabExecutor {
         return false;
     }
 
-    @Nullable
     @Override
-    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public List<String> onTabComplete(CommandSender sender,  Command command, String label, String[] args) {
         List<String> options = new ArrayList<>();
         switch (command.getName()){
             case "profile" -> options = playerProfileCommand.TabExecutor(args);
-            case "kprofile" -> options =kingdomProfileCommand.TabExecutor(args);
-            case "trophy" -> options =thropyCommand.TabExecutor(args);
+            case "kprofile" -> options = kingdomProfileCommand.TabExecutor(args);
+            case "trophy" -> options = thropyCommand.TabExecutor(args);
         }
         return options;
     }

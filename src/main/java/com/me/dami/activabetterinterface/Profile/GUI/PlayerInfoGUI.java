@@ -3,7 +3,7 @@ package com.me.dami.activabetterinterface.Profile.GUI;
 import com.me.dami.activabetterinterface.Base.IOpenGui;
 import com.me.dami.activabetterinterface.Base.Kingdom;
 import com.me.dami.activabetterinterface.GUI.StaticGuiItems;
-import me.map.ultimatekingdom.API.UltimateKingdom;
+import me.map.ultimatekingdom.api.UltimateKingdom;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -56,7 +56,7 @@ public class PlayerInfoGUI implements IOpenGui {
 
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName(UltimateKingdom.Players().getPlayer(p.getUniqueId()).getKingdom().getDisplayName());
+        meta.setDisplayName(UltimateKingdom.Players().getPlayer(p.getUniqueId()).getKingdom().getDisplay());
 
         ArrayList<String> lore = new ArrayList<>();
 

@@ -2,7 +2,6 @@ package com.me.dami.activabetterinterface.Profile.command;
 
 import com.me.dami.activabetterinterface.Base.ICommand;
 import com.me.dami.activabetterinterface.Permissions.LuckPermManager;
-import me.map.ultimatekingdom.API.UltimateKingdom;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.model.user.UserManager;
 import org.bukkit.entity.Player;
@@ -25,10 +24,12 @@ public class PlayerProfileCommand implements ICommand {
 
         if(_args.length == 0){
             //open self info
+            boolean has = LuckPermManager.HasPermissions(_p, perms);
+            if(has){
+                //open admin version
+            }else{
 
-
-            LuckPermManager.HasPermissions(_p, perms);
-
+            }
             return false;
         }
 

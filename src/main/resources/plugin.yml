@@ -5,3 +5,10 @@ api-version: 1.19
 prefix: BetterInterface
 authors: [ gewoondami60 ]
 description: activa better guis implemented by dami
+commands:
+  profile:
+    description: open a profile menu
+  kprofile:
+    description: opens a kingdom profile
+  trophy:
+    description: opens a trophy editor
