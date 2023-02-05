@@ -16,18 +16,8 @@ public class PlayerProfileCommand implements ICommand {
 
     public boolean Executed(Player _p, String[] _args) {
 
-        ArrayList<String> perms = new ArrayList<String>() {
-            {
-                add("Admin");
-                add("Mod");
-            }
-        };
-
         if(_args.length == 0){
             //open self info
-
-
-            LuckPermManager.HasPermissions(_p, perms);
 
             return false;
         }
