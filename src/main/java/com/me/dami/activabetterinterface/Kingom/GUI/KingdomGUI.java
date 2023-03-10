@@ -30,6 +30,11 @@ public class KingdomGUI implements IOpenGui {
     }
 
     @Override
+    public void OpenStaffInventory(Player _p, String _name) {
+
+    }
+
+    @Override
     public Inventory OpenInventory(Player _p, String _name) {
         Inventory inv = Bukkit.createInventory(null,54,_p.getDisplayName());
 
@@ -86,7 +91,9 @@ public class KingdomGUI implements IOpenGui {
                             Material.GOLDEN_HELMET,
                             new ArrayList<>() {
                                 {
-                                    add(kPlayer.getPlayer().getName() + "(" + kPlayer.getName() + ")");
+                                    if (kPlayer.getName() != null) {
+                                        add(kPlayer.getName());
+                                    }
                                 }
                             },
                             true
@@ -120,11 +127,13 @@ public class KingdomGUI implements IOpenGui {
 
 
                     return StaticGuiItems.generateItem(
-                            kPlayer.getRank().getColor() + kPlayer.getRankString(),
+                            TextConverter.CheckString(kPlayer.getRank().getColor() + kPlayer.getRankString()),
                             Material.GOLDEN_HELMET,
                             new ArrayList<String>() {
                                 {
-                                    add(kPlayer.getPlayer().getName() + "(" + kPlayer.getName() + ")");
+                                    if (kPlayer.getName() != null) {
+                                        add(kPlayer.getName());
+                                    }
                                 }
                             },
                             true
@@ -160,7 +169,7 @@ public class KingdomGUI implements IOpenGui {
         for (UUID player : kd.getMemberList()) {
             KingdomPlayer kPlayer = UltimateKingdom.getKingdomServer().Players().getPlayer(player);
             if (Objects.equals("advisor", kPlayer.getRankString())) {
-                players.add(kPlayer.getPlayer().getName() + "(" + kPlayer.getName() + ")");
+                players.add(kPlayer.getName());
 
             }
         }
@@ -179,7 +188,7 @@ public class KingdomGUI implements IOpenGui {
         for (UUID player : kd.getMemberList()) {
             KingdomPlayer kPlayer = UltimateKingdom.getKingdomServer().Players().getPlayer(player);
             if (Objects.equals("general", kPlayer.getRankString())) {
-                players.add(kPlayer.getPlayer().getName() + "(" + kPlayer.getName() + ")");
+                players.add(kPlayer.getName() );
 
             }
         }

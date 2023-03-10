@@ -10,5 +10,5 @@ commands:
     description: open a profile menu
   kprofile:
     description: opens a kingdom profile
-  trophy:
-    description: opens a trophy editor
+  badge:
+    description: opens a badge editor

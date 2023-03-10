@@ -28,4 +28,8 @@ public class DataBase {
             e.printStackTrace();
         }
     }
+
+    public static Connection GetConnection(){
+        return connection;
+    }
 }
