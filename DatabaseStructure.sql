@@ -14,7 +14,7 @@
 -- -----------------------------------------------------
 -- Schema trophies
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `trophies` DEFAULT CHARACTER SET utf8 ;
+CREATE DATABASE IF NOT EXISTS `trophies` DEFAULT CHARACTER SET utf8 ;
 USE `trophies` ;
 
 -- -----------------------------------------------------
