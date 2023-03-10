@@ -21,14 +21,13 @@ public class CommandManager implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender,Command command,String label, String[] args) {
-
-        if(!(sender instanceof Player && sender instanceof ConsoleCommandSender)){
+        if(!(sender instanceof Player || sender instanceof ConsoleCommandSender)){
             return false;
         }
 
 
         Player p = ((Player) sender).getPlayer();
-
+        System.out.println("command executed");
         switch (command.getName()){
             case "profile" -> playerProfileCommand.Executed(p , args);
             case "kprofile" -> kingdomProfileCommand.Executed(p , args);

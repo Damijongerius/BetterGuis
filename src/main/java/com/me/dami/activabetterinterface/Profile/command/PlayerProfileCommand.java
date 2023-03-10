@@ -1,9 +1,8 @@
 package com.me.dami.activabetterinterface.Profile.command;
 
 import com.me.dami.activabetterinterface.Base.ICommand;
-import com.me.dami.activabetterinterface.Permissions.LuckPermManager;
-import net.luckperms.api.LuckPerms;
-import net.luckperms.api.model.user.UserManager;
+import com.me.dami.activabetterinterface.Base.InventoryType;
+import com.me.dami.activabetterinterface.GUI.GUIManager;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -15,30 +14,14 @@ public class PlayerProfileCommand implements ICommand {
 
     public boolean Executed(Player _p, String[] _args) {
 
-        ArrayList<String> perms = new ArrayList<String>() {
-            {
-                add("Admin");
-                add("Mod");
-            }
-        };
-
         if(_args.length == 0){
-            //open self info
-            boolean has = LuckPermManager.HasPermissions(_p, perms);
-            if(has){
-                //open admin version
-            }else{
-
-            }
-            return false;
+                GUIManager.OpenInventory(_p, _p.getName(), InventoryType.PLAYERPROFILE);
         }
 
 
         //if(_args[1]) is an existing player stored in database
         //open other player
-        //first look if player exists(may be the player needs to be online who knows)
-
-        //feature idea compare player info's
+        //first look if player exists
 
         return false;
     }

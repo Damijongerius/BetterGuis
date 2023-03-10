@@ -1,4 +1,5 @@
 package com.me.dami.activabetterinterface.Base;
 
-public class Trophy {
+public class Saveable {
+    
 }

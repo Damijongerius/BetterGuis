@@ -4,5 +4,6 @@ public enum InventoryType {
     PLAYERPROFILE,
     KINGDOMPROFILE,
     FEATRUED,
-    TROPHYCreator
+    BADGECREATOR,
+    BADGELIST,
 }

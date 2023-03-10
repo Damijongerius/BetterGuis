@@ -13,7 +13,7 @@ public final class ActivaBetterInterface extends JavaPlugin {
     public void onEnable() {
         getCommand("profile").setExecutor(commandManager);
         getCommand("kprofile").setExecutor(commandManager);
-        getCommand("tropy").setExecutor(commandManager);
+        getCommand("badge").setExecutor(commandManager);
 
         getServer().getPluginManager().registerEvents(guiManager,this);
     }
