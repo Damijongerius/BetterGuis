@@ -17,6 +17,9 @@ public class PlayerProfileCommand implements ICommand {
         if(_args.length == 0){
                 GUIManager.OpenInventory(_p, _p.getName(), InventoryType.PLAYERPROFILE);
         }
+        if(_args.length == 1){
+            GUIManager.OpenInventory(_p, _args[0], InventoryType.PLAYERPROFILE);
+        }
 
 
         //if(_args[1]) is an existing player stored in database

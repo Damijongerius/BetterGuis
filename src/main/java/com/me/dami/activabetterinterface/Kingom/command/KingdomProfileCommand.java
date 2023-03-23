@@ -15,6 +15,9 @@ public class KingdomProfileCommand implements ICommand {
         if(_args.length == 0){
             GUIManager.OpenInventory(_p, UltimateKingdom.Players().getPlayer(_p).getKingdom().getName(), InventoryType.KINGDOMPROFILE);
         }
+        if(_args.length == 1){
+            GUIManager.OpenInventory(_p, UltimateKingdom.Kingdoms().getKingdom(_args[0]).getName(), InventoryType.KINGDOMPROFILE);
+        }
         return false;
     }
 

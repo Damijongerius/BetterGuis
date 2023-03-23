@@ -1,6 +1,5 @@
 package com.me.dami.activabetterinterface;
 
-import com.me.dami.activabetterinterface.Badge.DB.BadgeSchema;
 import com.me.dami.activabetterinterface.Base.DataBase;
 import com.me.dami.activabetterinterface.Commands.CommandManager;
 import com.me.dami.activabetterinterface.GUI.GUIManager;
@@ -16,8 +15,6 @@ public final class ActivaBetterInterface extends JavaPlugin {
 
     private DataBase db;
 
-    private BadgeSchema bsc;
-
     @Override
     public void onEnable() {
         getCommand("profile").setExecutor(commandManager);
@@ -28,18 +25,5 @@ public final class ActivaBetterInterface extends JavaPlugin {
 
         db = new DataBase("customer_259613_coreprotect", "cDqUHpGB^7sqXMr7", "jdbc:mysql://customer_259613_coreprotect:cDqUHpGB^7sqXMr7@eu02-sql.pebblehost.com/customer_259613_coreprotect");
 
-        bsc = new BadgeSchema(this);
-
-        try {
-            bsc.LoadSchema();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            bsc.ExecuteSchema();
-        } catch (SQLException | ClassNotFoundException | IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
