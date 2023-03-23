@@ -8,13 +8,13 @@ import java.util.Date;
 public class InsertBadge extends Connector {
 
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    public int InsertNewBadge(String name, String Description) throws SQLException {
+    public int InsertNewBadge(String name, String description) throws SQLException {
 
         int id = -1;
         String query = "INSERT INTO tp_Badge (Name, Description) VALUES (?, ?)";
         PreparedStatement ps = Connection().prepareStatement(query);
         ps.setString(1, name);
-        ps.setString(2, Description);
+        ps.setString(2, description);
         try (ResultSet rs = ps.getGeneratedKeys()) {
             if (rs.next()) {
                 id = rs.getInt(1);
@@ -23,7 +23,7 @@ public class InsertBadge extends Connector {
         return id;
     }
 
-    public boolean InsertBadgeIntoKingdom(int badge, String kingdom, int Placement) throws SQLException {
+    public boolean InsertBadgeIntoKingdom(int badge, String kingdom, int placement) throws SQLException {
 
         String query = "INSERT INTO KingdomBadge (tp_Badge_ID, UnlockDate, Placement, Kingdom_Name) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = Connection().prepareStatement(query);
@@ -32,7 +32,7 @@ public class InsertBadge extends Connector {
         Date currentDate = new Date();
         String dateString = formatter.format(currentDate);
         ps.setDate(2, java.sql.Date.valueOf(dateString));
-        ps.setInt(3, Placement);
+        ps.setInt(3, placement);
         ps.setString(4,kingdom);
         return true;
     }

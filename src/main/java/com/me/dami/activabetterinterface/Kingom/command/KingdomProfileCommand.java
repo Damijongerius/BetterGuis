@@ -10,18 +10,18 @@ import java.util.List;
 
 public class KingdomProfileCommand implements ICommand {
 
-    public boolean Executed(Player _p, String[] _args) {
+    public boolean Executed(Player p, String[] args) {
 
-        if(_args.length == 0){
-            GUIManager.OpenInventory(_p, UltimateKingdom.Players().getPlayer(_p).getKingdom().getName(), InventoryType.KINGDOMPROFILE);
+        if(args.length == 0){
+            GUIManager.OpenInventory(p, UltimateKingdom.Players().getPlayer(p).getKingdom().getName(), InventoryType.KINGDOMPROFILE);
         }
-        if(_args.length == 1){
-            GUIManager.OpenInventory(_p, UltimateKingdom.Kingdoms().getKingdom(_args[0]).getName(), InventoryType.KINGDOMPROFILE);
+        if(args.length == 1){
+            GUIManager.OpenInventory(p, UltimateKingdom.Kingdoms().getKingdom(args[0]).getName(), InventoryType.KINGDOMPROFILE);
         }
         return false;
     }
 
-    public void Action(Player _p, String _player) {
+    public void Action(Player p, String player) {
 
     }
 
@@ -29,7 +29,7 @@ public class KingdomProfileCommand implements ICommand {
 
     }
 
-    public List<String> TabExecutor(String[] _args) {
+    public List<String> TabExecutor(String[] args) {
         return null;
     }
 }

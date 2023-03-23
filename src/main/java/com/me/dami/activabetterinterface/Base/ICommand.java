@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface ICommand {
 
-    boolean Executed(Player _p, String[] _args);
+    boolean Executed(Player p, String[] args);
 
-    void Action(Player _p, String _player);
+    void Action(Player p, String player);
 
     void UnImplementedArgument();
 
-    List<String> TabExecutor(String[] _args);
+    List<String> TabExecutor(String[] args);
 
 }
