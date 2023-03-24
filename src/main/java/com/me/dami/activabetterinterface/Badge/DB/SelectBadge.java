@@ -1,8 +1,7 @@
 package com.me.dami.activabetterinterface.Badge.DB;
 
-import com.me.dami.activabetterinterface.Base.Badge;
+import com.me.dami.activabetterinterface.Badge.Savable.Badge;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

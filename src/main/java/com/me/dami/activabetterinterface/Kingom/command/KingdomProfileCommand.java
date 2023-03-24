@@ -13,10 +13,10 @@ public class KingdomProfileCommand implements ICommand {
     public boolean Executed(Player p, String[] args) {
 
         if(args.length == 0){
-            GUIManager.OpenInventory(p, UltimateKingdom.Players().getPlayer(p).getKingdom().getName(), InventoryType.KINGDOMPROFILE);
+            GUIManager.openInventory(p, UltimateKingdom.Players().getPlayer(p).getKingdom().getName(), InventoryType.KINGDOMPROFILE);
         }
         if(args.length == 1){
-            GUIManager.OpenInventory(p, UltimateKingdom.Kingdoms().getKingdom(args[0]).getName(), InventoryType.KINGDOMPROFILE);
+            GUIManager.openInventory(p, UltimateKingdom.Kingdoms().getKingdom(args[0]).getName(), InventoryType.KINGDOMPROFILE);
         }
         return false;
     }

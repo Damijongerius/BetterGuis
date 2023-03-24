@@ -1,4 +1,4 @@
-package com.me.dami.activabetterinterface.Base;
+package com.me.dami.activabetterinterface.Badge.Savable;
 
 import java.util.Date;
 
@@ -28,14 +28,6 @@ public class Badge {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Date getUnlockDate() {
-        return unlockDate;
-    }
-
-    public void setUnlockDate(Date unlockDate) {
-        this.unlockDate = unlockDate;
     }
 
     public String getDescription() {

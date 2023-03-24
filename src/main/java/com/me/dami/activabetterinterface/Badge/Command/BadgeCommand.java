@@ -13,7 +13,7 @@ public class BadgeCommand  implements ICommand {
     @Override
     public boolean Executed(Player _p, String[] _args) {
         if(_args.length == 0){
-            GUIManager.OpenInventory(_p, _p.getName(), InventoryType.BADGELIST);
+            GUIManager.openInventory(_p, _p.getName(), InventoryType.BADGELIST);
             //open self
         }
 
