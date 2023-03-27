@@ -9,42 +9,39 @@ import org.bukkit.entity.Player;
 import java.util.List;
 import java.util.Objects;
 
-public class BadgeCommand  implements ICommand {
-    @Override
-    public boolean Executed(Player _p, String[] _args) {
-        if(_args.length == 0){
-            GUIManager.openInventory(_p, _p.getName(), InventoryType.BADGELIST);
+public class BadgeCommand{
+    private final GUIManager gui;
+
+    public BadgeCommand(GUIManager gui){
+        this.gui = gui;
+    }
+
+    public boolean Executed(Player p, String[] args) {
+        if(args.length == 0){
+            gui.openInventory(p, p.getName(), InventoryType.BADGEMANAGER);
             //open self
         }
 
-        if(_args.length >= 1){
-            if(Objects.equals(_args[0], "player")){
-                if(_args.length == 2){
-                    //open player name arg[1]
+        if(args.length >= 1){
+            switch (args[0].toLowerCase()){
+                case "create" :{
+                    gui.openInventory(p,"creator",InventoryType.BADGEMANAGER);
                 }
-                //open self
+                case "open" : {
 
-            }else if(Objects.equals(_args[0], "kingdom")){
-                if(_args.length == 2){
-                    //open kingdom arg[1]
                 }
-                //open self kd
+                case "manage": {
+                    gui.openInventory(p,"badges",InventoryType.BADGEMANAGER);
+                }
+                break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + args[0].toLowerCase());
             }
         }
         return false;
     }
 
-    @Override
-    public void Action(Player _p, String _player) {
 
-    }
-
-    @Override
-    public void UnImplementedArgument() {
-
-    }
-
-    @Override
     public List<String> TabExecutor(String[] _args) {
         return null;
     }

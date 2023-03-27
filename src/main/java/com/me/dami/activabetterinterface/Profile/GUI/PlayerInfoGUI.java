@@ -15,45 +15,36 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
-public class PlayerInfoGUI implements IOpenGui {
+public class PlayerInfoGUI{
 
-    private int[] spacing = {0,1,2,3,4,5,6,7,8,9,11,17,18,19,20,21,22,23,24,25,26};
+    private static int[] spacing = {0,1,2,3,4,5,6,7,8,9,11,17,18,19,20,21,22,23,24,25,26};
 
-    public void OpenInventory(Inventory _inv, Player _p) {
-        //should be set playtime when accessable
 
-        _p.openInventory(_inv);
-    }
-
-    @Override
-    public void OpenStaffInventory(Player _p, String _name) {
-
-    }
-
-    public Inventory OpenInventory(Player _p, String _object) {
-        Inventory inv = Bukkit.createInventory(null,27,_p.getDisplayName());
+    public static Inventory createInventory(Player p, String name) {
+        Inventory inv = Bukkit.createInventory(null,27,name);
 
 
         for(int slot : spacing){
             inv.setItem(slot , StaticGuiItems.space);
         }
 
-        inv.setItem(10,SetHead(_object, _p));
+        inv.setItem(10,SetHead(p.getName(), p));
 
-        inv.setItem(12, SetKingdom(_p));
+        inv.setItem(12, SetKingdom(p));
 
-        inv.setItem(13, SetMedals(_p));
+        inv.setItem(13, SetMedals(p));
 
-        inv.setItem(14, SetPlayTime(_p));
+        inv.setItem(14, SetPlayTime(p));
 
         //should be set playtime when accessable
 
-        _p.openInventory(inv);
+        p.openInventory(inv);
         return inv;
     }
 
-    private ItemStack SetHead(String _name, Player p){
+    private static ItemStack SetHead(String _name, Player p){
         ItemStack item = new ItemStack(Material.PLAYER_HEAD);
 
         SkullMeta skull = (SkullMeta) item.getItemMeta();
@@ -83,7 +74,7 @@ public class PlayerInfoGUI implements IOpenGui {
         return item;
     }
 
-    private ItemStack SetKingdom(Player p){
+    private static ItemStack SetKingdom(Player p){
         ItemStack item = new ItemStack(Material.SPRUCE_DOOR);
 
         ItemMeta meta = item.getItemMeta();
@@ -105,7 +96,7 @@ public class PlayerInfoGUI implements IOpenGui {
         return item;
     }
 
-    private ItemStack SetMedals(Player p){
+    private static ItemStack SetMedals(Player p){
         ItemStack item = new ItemStack(Material.SUNFLOWER);
 
         ItemMeta meta = item.getItemMeta();
@@ -123,7 +114,7 @@ public class PlayerInfoGUI implements IOpenGui {
         return item;
     }
 
-    private ItemStack SetPlayTime(Player p){
+    private static ItemStack SetPlayTime(Player p){
         ItemStack item = new ItemStack(Material.CLOCK);
 
         ItemMeta meta = item.getItemMeta();

@@ -19,32 +19,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-public class KingdomGUI implements IOpenGui {
+public class KingdomGUI{
 
-    private int[] spacing = {0,1,2,3,4,5,6,7,8,9,12,14,17,18,19,20,21,22,23,24,25,26,27,29,33,35,36,38,42,44,45,46,47,48,49,50,51,52,53};
+    private static int[] spacing = {0,1,2,3,4,5,6,7,8,9,12,14,17,18,19,20,21,22,23,24,25,26,27,29,33,35,36,38,42,44,45,46,47,48,49,50,51,52,53};
 
-    @Override
-    public void OpenInventory(Inventory _inv, Player _p) {
-
-        _p.openInventory(_inv);
-    }
-
-    @Override
-    public void OpenStaffInventory(Player _p, String _name) {
-
-    }
-
-    @Override
-    public Inventory OpenInventory(Player _p, String _name) {
-        Inventory inv = Bukkit.createInventory(null,54,_p.getDisplayName());
+    public static Inventory createInventory(Kingdom kd, String name) {
+        Inventory inv = Bukkit.createInventory(null,54,name);
 
         for(int slot : spacing){
             inv.setItem(slot, StaticGuiItems.space);
-        }
-
-        Kingdom kd = UltimateKingdom.Kingdoms().getKingdom(_name);
-        if(kd == null){
-            return null;
         }
 
         inv.setItem(10,SetKing(kd));
@@ -63,11 +46,10 @@ public class KingdomGUI implements IOpenGui {
         inv.setItem(41,SetMedals());
         inv.setItem(43,SetOfflinePlayers(kd));
 
-        _p.openInventory(inv);
         return inv;
     }
 
-    private ItemStack SetKing(Kingdom kd) {
+    private static ItemStack SetKing(Kingdom kd) {
         System.out.println("setKing");
         ArrayList<String> rolls = new ArrayList<String>() {
             {
@@ -109,7 +91,7 @@ public class KingdomGUI implements IOpenGui {
         );
     }
 
-    private ItemStack SetQueen(Kingdom kd){
+    private static ItemStack SetQueen(Kingdom kd){
         ArrayList<String> rolls = new ArrayList<>() {
             {
                 add("baroness");
@@ -149,7 +131,7 @@ public class KingdomGUI implements IOpenGui {
         );
     }
 
-    private ItemStack SetKingdom(Kingdom kd){
+    private static ItemStack SetKingdom(Kingdom kd){
         return StaticGuiItems.generateItem(
                 kd.getName(),
                 Material.CRAFTING_TABLE,
@@ -162,7 +144,7 @@ public class KingdomGUI implements IOpenGui {
         );
     }
 
-    private ItemStack SetAdvisors(Kingdom kd) {
+    private static ItemStack SetAdvisors(Kingdom kd) {
 
         ArrayList<String> players = new ArrayList<>();
 
@@ -181,7 +163,7 @@ public class KingdomGUI implements IOpenGui {
             );
     }
 
-    private ItemStack SetGeneral(Kingdom kd){
+    private static ItemStack SetGeneral(Kingdom kd){
 
         ArrayList<String> players = new ArrayList<>();
 
@@ -200,7 +182,7 @@ public class KingdomGUI implements IOpenGui {
         );
     }
 
-    private ItemStack SetAlly1(Kingdom kd){
+    private static ItemStack SetAlly1(Kingdom kd){
         return StaticGuiItems.generateItem(
                 "Ally1",
                 Material.TOTEM_OF_UNDYING,
@@ -209,7 +191,7 @@ public class KingdomGUI implements IOpenGui {
         );
     }
 
-    private ItemStack SetAlly2(Kingdom kd){
+    private static ItemStack SetAlly2(Kingdom kd){
         return StaticGuiItems.generateItem(
                 "Ally1",
                 Material.TOTEM_OF_UNDYING,
@@ -218,7 +200,7 @@ public class KingdomGUI implements IOpenGui {
         );
     }
 
-    private ItemStack SetGovernment(Kingdom kd){
+    private static ItemStack SetGovernment(Kingdom kd){
         return StaticGuiItems.generateItem(
                 "government",
                 Material.GOLD_BLOCK,
@@ -227,7 +209,7 @@ public class KingdomGUI implements IOpenGui {
         );
     }
 
-    private ItemStack SetAbout(){
+    private static ItemStack SetAbout(){
         return StaticGuiItems.generateItem(
                 "about",
                 Material.BOOK,
@@ -236,7 +218,7 @@ public class KingdomGUI implements IOpenGui {
         );
     }
 
-    private ItemStack SetPoints(Kingdom kd){
+    private static ItemStack SetPoints(Kingdom kd){
         return StaticGuiItems.generateItem(
                 "government",
                 Material.AMETHYST_CLUSTER,
@@ -245,7 +227,7 @@ public class KingdomGUI implements IOpenGui {
         );
     }
 
-    private ItemStack SetWarScore(){
+    private static ItemStack SetWarScore(){
         return StaticGuiItems.generateItem(
                 "warScore",
                 Material.WOODEN_SWORD,
@@ -254,7 +236,7 @@ public class KingdomGUI implements IOpenGui {
         );
     }
 
-    private ItemStack SetDiscordLink(){
+    private static ItemStack SetDiscordLink(){
         return StaticGuiItems.generateItem(
                 "discordLink",
                 Material.GOLD_BLOCK,
@@ -270,7 +252,7 @@ public class KingdomGUI implements IOpenGui {
         );
     }
 
-    private ItemStack SetMedals(){
+    private static ItemStack SetMedals(){
         return StaticGuiItems.generateItem(
                 "medals",
                 Material.SUNFLOWER,
@@ -279,7 +261,7 @@ public class KingdomGUI implements IOpenGui {
         );
     }
 
-    private ItemStack SetOnlinePlayers(Kingdom kd){
+    private static ItemStack SetOnlinePlayers(Kingdom kd){
         ArrayList<String> players = new ArrayList<>();
 
         String aFewPlayers = ChatColor.GREEN + "";
@@ -309,7 +291,7 @@ public class KingdomGUI implements IOpenGui {
         );
     }
 
-    private ItemStack SetOfflinePlayers(Kingdom kd){
+    private static ItemStack SetOfflinePlayers(Kingdom kd){
         List<UUID> players = kd.getMemberList();
 
         for(Player p : kd.getOnlinePlayers()){

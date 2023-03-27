@@ -11,4 +11,4 @@ commands:
   kprofile:
     description: opens a kingdom profile
   badge:
-    description: opens a badge editor
+    description: opens something for badges

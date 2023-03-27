@@ -45,7 +45,7 @@ public class Kingdom {
         List<LinkedBadge> failedBadges = new ArrayList<>();
         for(LinkedBadge badge : unSavedBadges){
             try {
-                insertBadge.IntoKingdom(badge.getId(),badge.getUnlockDate(),badge.getPlacement(),name);
+                insertBadge.Into(badge.getId(),badge.getUnlockDate(),badge.getPlacement(),name);
                 badges.add(badge);
             } catch (SQLException e) {
              failedBadges.add(badge);

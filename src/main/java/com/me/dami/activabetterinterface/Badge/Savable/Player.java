@@ -43,14 +43,14 @@ public class Player {
         List<LinkedBadge> failedBadges = new ArrayList<>();
         for(LinkedBadge badge : unSavedBadges){
             try {
-                insertBadge.IntoPlayer(badge.getId(),badge.getUnlockDate(),badge.getPlacement(),uuid.toString());
+                insertBadge.Into(badge.getId(),badge.getUnlockDate(),badge.getPlacement(),uuid.toString());
                 badges.add(badge);
             } catch (SQLException e) {
                 failedBadges.add(badge);
             }
         }
         unSavedBadges.clear();
-        if(failedBadges.size() > 0){
+        if(!failedBadges.isEmpty()){
             Map<String,Object> mapBadges = new LinkedHashMap<>();
             for(int i = 0; i  < failedBadges.size(); i++){
                 mapBadges.put("" + i, failedBadges.get(i).toConfig());

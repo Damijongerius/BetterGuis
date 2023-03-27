@@ -1,7 +1,5 @@
 package com.me.dami.activabetterinterface.Badge.Savable;
 
-import java.util.Date;
-
 public class Badge {
     private int id;
     private String name;

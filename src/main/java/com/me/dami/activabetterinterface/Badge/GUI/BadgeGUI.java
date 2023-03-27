@@ -1,10 +1,7 @@
 package com.me.dami.activabetterinterface.Badge.GUI;
 
 import com.me.dami.activabetterinterface.Base.IOpenGui;
-import com.me.dami.activabetterinterface.Base.InventoryType;
 import com.me.dami.activabetterinterface.GUI.StaticGuiItems;
-import com.me.dami.activabetterinterface.Permissions.LuckPermManager;
-import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -19,22 +16,26 @@ public class BadgeGUI implements IOpenGui {
     int[] staffSpace = {4,13,22,31,40,49};
     int[] existingSlots = {1,2,3,10,11,13,19,20,21,28,29,30,37,38,39,46,47,48};
     @Override
-    public void OpenInventory(Inventory _inv, Player _p) {
-        Inventory inv = Bukkit.createInventory(null,54,_p.getDisplayName());
+    public void openInventory(Inventory inv, Player p) {
+        inv = Bukkit.createInventory(null,54,p.getDisplayName());
 
         for(int slot : space){
             inv.setItem(slot, StaticGuiItems.space);
         }
         ItemStack item = new ItemStack(Material.WRITABLE_BOOK);
-        _p.openBook(item);
+        p.openBook(item);
     }
     @Override
-    public void OpenStaffInventory(Player _p, String _name) {
-        Inventory inv = Bukkit.createInventory(null,54,_p.getDisplayName());
+    public void openStaffInventory(Player p, String name) {
+        Inventory inv = Bukkit.createInventory(null,54,p.getDisplayName());
     }
 
     @Override
-    public Inventory OpenInventory(Player _p, String _name) {
+    public Inventory openInventory(Player p, String name) {
+        return null;
+    }
+
+    public Inventory OpenInventory(Player p, String name) {
         return null;
     }
 }

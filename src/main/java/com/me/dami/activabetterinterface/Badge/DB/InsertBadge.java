@@ -23,9 +23,9 @@ public class InsertBadge extends Connector {
         return id;
     }
 
-    public boolean IntoKingdom(int badge, Date unlockDatum, int placement, String kingdom) throws SQLException {
+    public boolean Into(int badge, Date unlockDatum, int placement, String kingdom) throws SQLException {
 
-        String query = "INSERT INTO KingdomBadge (tp_Badge_ID, UnlockDate, Placement, Kingdom_Name) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO LinkedBadge (tp_Badge_ID, UnlockDate, Placement, Kingdom_Name) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = Connection().prepareStatement(query);
         ps.setInt(1, badge);
 
@@ -35,37 +35,15 @@ public class InsertBadge extends Connector {
         ps.setString(4,kingdom);
         return true;
     }
-    public boolean IntoKingdom(int badge,Date unlockDatum, String kingdom) throws SQLException {
+    public boolean Into(int badge,Date unlockDatum, String kingdom) throws SQLException {
 
-        String query = "INSERT INTO KingdomBadge (tp_Badge_ID, UnlockDate, Kingdom_Name) VALUES (?, ?, ?)";
+        String query = "INSERT INTO LinkedBadge (tp_Badge_ID, UnlockDate, Kingdom_Name) VALUES (?, ?, ?)";
         PreparedStatement ps = Connection().prepareStatement(query);
         ps.setInt(1, badge);
 
         String dateString = formatter.format(unlockDatum);
         ps.setDate(2, java.sql.Date.valueOf(dateString));
         ps.setString(3,kingdom);
-        return true;
-    }
-
-    public boolean IntoPlayer(int badge, Date unlockDate, String player) throws SQLException {
-        String query = "INSERT INTO PlayerBadge (tp_Badge_ID, UnlockDate, player) VALUES (?, ?, ?)";
-        PreparedStatement ps = Connection().prepareStatement(query);
-        ps.setInt(1, badge);
-
-        String dateString = formatter.format(unlockDate);
-        ps.setDate(2, java.sql.Date.valueOf(dateString));
-        ps.setString(3,player);
-        return true;
-    }
-
-    public boolean IntoPlayer(int badge, Date unlockDate, int placement, String player) throws SQLException {
-        String query = "INSERT INTO PlayerBadge (tp_Badge_ID, UnlockDate,placement, player) VALUES (?, ?, ?, ?)";
-        PreparedStatement ps = Connection().prepareStatement(query);
-        ps.setInt(1, badge);
-
-        String dateString = formatter.format(unlockDate);
-        ps.setDate(2, java.sql.Date.valueOf(dateString));
-        ps.setString(3,player);
         return true;
     }
 }

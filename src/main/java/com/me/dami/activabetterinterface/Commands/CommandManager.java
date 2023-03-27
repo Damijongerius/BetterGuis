@@ -1,6 +1,7 @@
 package com.me.dami.activabetterinterface.Commands;
 
 import com.me.dami.activabetterinterface.Badge.Command.BadgeCommand;
+import com.me.dami.activabetterinterface.GUI.GUIManager;
 import com.me.dami.activabetterinterface.Kingom.command.KingdomProfileCommand;
 import com.me.dami.activabetterinterface.Profile.command.PlayerProfileCommand;
 import org.bukkit.command.Command;
@@ -13,10 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandManager implements TabExecutor {
+    private final PlayerProfileCommand playerProfileCommand;
+    private final KingdomProfileCommand kingdomProfileCommand;
+    private final BadgeCommand badgeCommand;
 
-    private PlayerProfileCommand playerProfileCommand = new PlayerProfileCommand();
-    private KingdomProfileCommand kingdomProfileCommand = new KingdomProfileCommand();
-    private BadgeCommand badgeCommand = new BadgeCommand();
+    public CommandManager(GUIManager gui){
+        playerProfileCommand =  new PlayerProfileCommand(gui);
+        kingdomProfileCommand = new KingdomProfileCommand(gui);
+        badgeCommand = new BadgeCommand(gui);
+    }
 
     @Override
     public boolean onCommand(CommandSender sender,Command command,String label, String[] args) {
@@ -30,7 +36,7 @@ public class CommandManager implements TabExecutor {
         switch (command.getName()){
             case "profile" -> playerProfileCommand.Executed(p , args);
             case "kprofile" -> kingdomProfileCommand.Executed(p , args);
-            case "trophy" -> badgeCommand.Executed(p , args);
+            case "badge" -> badgeCommand.Executed(p , args);
         }
 
         return false;

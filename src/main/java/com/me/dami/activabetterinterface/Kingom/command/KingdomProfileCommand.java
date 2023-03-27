@@ -8,26 +8,23 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class KingdomProfileCommand implements ICommand {
+public class KingdomProfileCommand{
+    private final GUIManager gui;
 
+    public KingdomProfileCommand(GUIManager gui){
+        this.gui = gui;
+    }
     public boolean Executed(Player p, String[] args) {
 
         if(args.length == 0){
-            GUIManager.openInventory(p, UltimateKingdom.Players().getPlayer(p).getKingdom().getName(), InventoryType.KINGDOMPROFILE);
+            gui.openInventory(p, UltimateKingdom.Players().getPlayer(p).getKingdom().getName(), InventoryType.KINGDOMMANAGER);
         }
         if(args.length == 1){
-            GUIManager.openInventory(p, UltimateKingdom.Kingdoms().getKingdom(args[0]).getName(), InventoryType.KINGDOMPROFILE);
+            gui.openInventory(p, UltimateKingdom.Kingdoms().getKingdom(args[0]).getName(), InventoryType.KINGDOMMANAGER);
         }
         return false;
     }
 
-    public void Action(Player p, String player) {
-
-    }
-
-    public void UnImplementedArgument() {
-
-    }
 
     public List<String> TabExecutor(String[] args) {
         return null;

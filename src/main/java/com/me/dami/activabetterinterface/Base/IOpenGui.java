@@ -5,10 +5,10 @@ import org.bukkit.inventory.Inventory;
 
 public interface IOpenGui {
 
-    void OpenInventory(Inventory _inv, Player _p);
+    void openInventory(Inventory inv, Player p);
 
-    void OpenStaffInventory(Player _p,  String _name);
+    void openStaffInventory(Player p,  String name);
 
-    Inventory OpenInventory(Player _p, String _name);
+    Inventory openInventory(Player p, String name);
 
 }

@@ -15,6 +15,12 @@ public class LinkedBadge {
         this.placement = placement;
     }
 
+    public LinkedBadge(int id, Date unlockDate, int placement) {
+        this.id = id;
+        this.unlockDate = unlockDate;
+        this.placement = placement;
+    }
+
     public int getId() {
         return id;
     }

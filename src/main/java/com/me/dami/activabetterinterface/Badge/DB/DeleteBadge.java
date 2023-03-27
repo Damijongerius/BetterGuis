@@ -12,26 +12,21 @@ public class DeleteBadge extends Connector {
     }
 
     /**
-     * @SQL this will delete all saved badges to kingdoms
+     * @SQL this will delete all saved badges to ....
      */
-    public void RemoveKingdomBadges(String kingdom) throws SQLException {
-        PreparedStatement statement = Connection().prepareStatement("DELETE FROM KingdomBadge WHERE name = ?");
-        statement.setString(1, kingdom);
+    public void RemoveBadgesFrom(String object) throws SQLException {
+        PreparedStatement statement = Connection().prepareStatement("DELETE FROM LinkedBadge WHERE Name = ?");
+        statement.setString(1, object);
         statement.executeUpdate();
     }
 
     /**
-     * @SQL this will delete every a badge from every kingdom
+     * @SQL this will delete every Link from badge
      */
-    public void RemoveKingdomBadges(int id) throws SQLException {
-        PreparedStatement statement = Connection().prepareStatement("DELETE FROM KingdomBadge WHERE tp_Badge_ID = ?");
+    public void RemoveBadgesFrom(int id) throws SQLException {
+        PreparedStatement statement = Connection().prepareStatement("DELETE FROM LinkedBadge WHERE tp_Badge_ID = ?");
         statement.setInt(1, id);
         statement.executeUpdate();
     }
 
-    public void RemovePlayerBadges(String player) throws SQLException {
-        PreparedStatement statement = Connection().prepareStatement("DELETE FROM PlayerBadge WHERE Player_UUID = ?");
-        statement.setString(1, player);
-        statement.executeUpdate();
-    }
 }

@@ -8,15 +8,20 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 
-public class PlayerProfileCommand implements ICommand {
+public class PlayerProfileCommand{
+    private final GUIManager gui;
 
+    public PlayerProfileCommand(GUIManager gui){
+        this.gui = gui;
+    }
     public boolean Executed(Player p, String[] args) {
 
         if(args.length == 0){
-                GUIManager.openInventory(p, p.getName(), InventoryType.PLAYERPROFILE);
+            System.out.println("command");
+            gui.openInventory(p, p.getName(), InventoryType.PLAYERMANAGER);
         }
         if(args.length == 1){
-            GUIManager.openInventory(p, args[0], InventoryType.PLAYERPROFILE);
+            gui.openInventory(p, args[0], InventoryType.PLAYERMANAGER);
         }
 
 
@@ -25,15 +30,6 @@ public class PlayerProfileCommand implements ICommand {
         //first look if player exists
 
         return false;
-    }
-
-    public void Action(Player p, String player) {
-
-    }
-
-
-    public void UnImplementedArgument() {
-
     }
 
 

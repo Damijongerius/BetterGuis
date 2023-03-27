@@ -2,18 +2,18 @@ package com.me.dami.activabetterinterface;
 
 import com.me.dami.activabetterinterface.Base.ConfigurationManager;
 import com.me.dami.activabetterinterface.Base.DataBase;
+import com.me.dami.activabetterinterface.Base.Saveable;
 import com.me.dami.activabetterinterface.Commands.CommandManager;
 import com.me.dami.activabetterinterface.GUI.GUIManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 public final class ActivaBetterInterface extends JavaPlugin {
 
     private static ActivaBetterInterface instance;
-    private CommandManager commandManager = new CommandManager();
     private GUIManager  guiManager = new GUIManager();
+    private CommandManager commandManager = new CommandManager(guiManager);
+
+    private static Saveable saveable = new Saveable();
 
     private ConfigurationManager FailedSavables;
 

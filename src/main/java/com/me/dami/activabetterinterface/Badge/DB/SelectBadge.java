@@ -1,6 +1,7 @@
 package com.me.dami.activabetterinterface.Badge.DB;
 
 import com.me.dami.activabetterinterface.Badge.Savable.Badge;
+import com.me.dami.activabetterinterface.Badge.Savable.LinkedBadge;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,10 +11,9 @@ import java.util.List;
 
 public class SelectBadge extends Connector {
 
-    public List<Badge> GetBadges(String uuid) throws SQLException {
+    public List<Badge> getBadges() throws SQLException {
         String query = "SELECT * FROM Badge";
         PreparedStatement ps = Connection().prepareStatement(query);
-        ps.setString(1, uuid);
 
         ResultSet resultSet = ps.executeQuery();
 
@@ -31,10 +31,10 @@ public class SelectBadge extends Connector {
         return badges;
     }
 
-    public List<Integer> GetPlayerBadges(String uuid) throws SQLException {
-        String query = "SELECT * FROM PlayerBadge WHERE Player_UUID = ?";
+    public List<Integer> getBadgesFrom(String object) throws SQLException {
+        String query = "SELECT * FROM PlayerBadge WHERE Name = ?";
         PreparedStatement ps = Connection().prepareStatement(query);
-        ps.setString(1, uuid);
+        ps.setString(1, object);
 
         ResultSet resultSet = ps.executeQuery();
 
@@ -46,19 +46,21 @@ public class SelectBadge extends Connector {
         return ids;
     }
 
-    public List<Integer> GetKingdomBadges(String kingdom) throws SQLException {
-        String query = "SELECT * FROM KingdomBadge WHERE Kingdom_Name = ?";
+    public List<LinkedBadge> getAllFrom(String object) throws SQLException {
+        String query = "SELECT * FROM PlayerBadge WHERE Name = ?";
         PreparedStatement ps = Connection().prepareStatement(query);
-        ps.setString(1, kingdom);
+        ps.setString(1, object);
 
         ResultSet resultSet = ps.executeQuery();
 
-        List<Integer> ids = new ArrayList<>();
+        List<LinkedBadge> badges = new ArrayList<>();
         while (resultSet.next()) {
-            ids.add(resultSet.getInt("tp_Badge_ID"));
+            badges.add(new LinkedBadge(resultSet.getInt("tp_Badge_ID"),
+                    java.sql.Date.valueOf(resultSet.getDate("UnlockDate").toLocalDate()),
+                    resultSet.getInt("Placement")
+            ));
         }
 
-        return ids;
+        return badges;
     }
-
 }
