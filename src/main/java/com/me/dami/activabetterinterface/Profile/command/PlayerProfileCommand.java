@@ -17,7 +17,6 @@ public class PlayerProfileCommand{
     public boolean Executed(Player p, String[] args) {
 
         if(args.length == 0){
-            System.out.println("command");
             gui.openInventory(p, p.getName(), InventoryType.PLAYERMANAGER);
         }
         if(args.length == 1){

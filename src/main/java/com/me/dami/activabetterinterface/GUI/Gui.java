@@ -6,6 +6,7 @@ import com.me.dami.activabetterinterface.Profile.GUI.PlayerInfoGUI;
 import me.map.ultimatekingdom.api.UltimateKingdom;
 import me.map.ultimatekingdom.api.objects.Kingdom;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
@@ -18,6 +19,8 @@ public class Gui {
     private final String name;
     private Map<UUID,String> players =  new LinkedHashMap<>();
     private Map<String, Inventory> openInventories = new LinkedHashMap<>();
+
+    private final static GUIManager guim = GUIManager.getInstance();
 
     public Gui(String name) {
         this.name = name;
@@ -51,9 +54,16 @@ public class Gui {
         switch (this.name){
             case "playermanager" : {
                 Player p = Bukkit.getPlayer(base);
+                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(base);
                 if(p == null){
-                    System.out.println("[message] someone tried to load the profile of a player named (" + base + ")" + " we failed loading it");
-                    return null;
+                    if(offlinePlayer == null){
+                        System.out.println("[message] someone tried to load the profile of a player named (" + base + ")" + " we failed loading it");
+                        return null;
+                    }
+                    if(isAdmin){
+                        return PlayerInfoGUI.createInventory(offlinePlayer, name);
+                    }
+                    return PlayerInfoGUI.createInventory(offlinePlayer, name);
                 }
                 if(isAdmin){
                     return PlayerInfoGUI.createInventory(p, name);

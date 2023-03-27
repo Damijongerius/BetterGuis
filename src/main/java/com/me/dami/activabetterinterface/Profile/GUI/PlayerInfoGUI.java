@@ -8,6 +8,7 @@ import me.map.ultimatekingdom.api.objects.KingdomPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -30,21 +31,41 @@ public class PlayerInfoGUI{
             inv.setItem(slot , StaticGuiItems.space);
         }
 
-        inv.setItem(10,SetHead(p.getName(), p));
+        inv.setItem(10,SetHead(p.getName(), p.getUniqueId(), p.getDisplayName()));
 
-        inv.setItem(12, SetKingdom(p));
+        inv.setItem(12, SetKingdom(p.getUniqueId()));
 
-        inv.setItem(13, SetMedals(p));
+        inv.setItem(13, SetMedals(p.getUniqueId()));
 
-        inv.setItem(14, SetPlayTime(p));
+        inv.setItem(14, SetPlayTime(p.getUniqueId()));
 
         //should be set playtime when accessable
 
-        p.openInventory(inv);
         return inv;
     }
 
-    private static ItemStack SetHead(String _name, Player p){
+    public static Inventory createInventory(OfflinePlayer p, String name) {
+        Inventory inv = Bukkit.createInventory(null,27,name);
+
+
+        for(int slot : spacing){
+            inv.setItem(slot , StaticGuiItems.space);
+        }
+
+        inv.setItem(10,SetHead(p.getName(), p.getUniqueId(), p.getName()));
+
+        inv.setItem(12, SetKingdom(p.getUniqueId()));
+
+        inv.setItem(13, SetMedals(p.getUniqueId()));
+
+        inv.setItem(14, SetPlayTime(p.getUniqueId()));
+
+        //should be set playtime when accessable
+
+        return inv;
+    }
+
+    private static ItemStack SetHead(String _name, UUID p, String customDisplay){
         ItemStack item = new ItemStack(Material.PLAYER_HEAD);
 
         SkullMeta skull = (SkullMeta) item.getItemMeta();
@@ -53,7 +74,7 @@ public class PlayerInfoGUI{
 
         ArrayList<String> lore = new ArrayList<>();
 
-        KingdomPlayer kPlayer = UltimateKingdom.Players().getPlayer(p.getUniqueId());
+        KingdomPlayer kPlayer = UltimateKingdom.Players().getPlayer(p);
 
         lore.add("Balance: " + "Geen balance beschikbaar");
         lore.add("Rank: " + TextConverter.CheckString(kPlayer.getRank().getColor() + kPlayer.getRankString()));
@@ -64,7 +85,7 @@ public class PlayerInfoGUI{
             lore.add("Status :" + ChatColor.RED + "Offline");
         }
 
-        lore.add("customDisplay: " + p.getDisplayName());
+        lore.add("customDisplay: " + customDisplay);
 
         skull.setLore(lore);
 
@@ -74,14 +95,13 @@ public class PlayerInfoGUI{
         return item;
     }
 
-    private static ItemStack SetKingdom(Player p){
+    private static ItemStack SetKingdom(UUID p){
         ItemStack item = new ItemStack(Material.SPRUCE_DOOR);
 
         ItemMeta meta = item.getItemMeta();
 
-        String kd = UltimateKingdom.Players().getPlayer(p.getUniqueId()).getKingdom().getDisplay();
+        String kd = UltimateKingdom.Players().getPlayer(p).getKingdom().getDisplay();
         if(kd != null){
-            p.sendMessage(kd);
             assert meta != null;
             meta.setDisplayName("Kingdom");
         }
@@ -96,7 +116,7 @@ public class PlayerInfoGUI{
         return item;
     }
 
-    private static ItemStack SetMedals(Player p){
+    private static ItemStack SetMedals(UUID p){
         ItemStack item = new ItemStack(Material.SUNFLOWER);
 
         ItemMeta meta = item.getItemMeta();
@@ -114,7 +134,7 @@ public class PlayerInfoGUI{
         return item;
     }
 
-    private static ItemStack SetPlayTime(Player p){
+    private static ItemStack SetPlayTime(UUID p){
         ItemStack item = new ItemStack(Material.CLOCK);
 
         ItemMeta meta = item.getItemMeta();
