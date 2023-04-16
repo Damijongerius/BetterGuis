@@ -1,26 +1,24 @@
-package com.me.dami.activabetterinterface.Profile.command;
+package com.me.dami.activabetterinterface.Commands.childs;
 
-import com.me.dami.activabetterinterface.Base.ICommand;
-import com.me.dami.activabetterinterface.Base.InventoryType;
-import com.me.dami.activabetterinterface.GUI.GUIManager;
+import com.dami.guimanager.GuiManager;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
 
 public class PlayerProfileCommand{
-    private final GUIManager gui;
+    private final GuiManager gui;
 
-    public PlayerProfileCommand(GUIManager gui){
+    public PlayerProfileCommand(GuiManager gui){
         this.gui = gui;
     }
     public boolean Executed(Player p, String[] args) {
 
         if(args.length == 0){
-            gui.openInventory(p, p.getName(), InventoryType.PLAYERMANAGER);
+            gui.openGuiFor(p,"playerView", p.getName());
         }
         if(args.length == 1){
-            gui.openInventory(p, args[0], InventoryType.PLAYERMANAGER);
+            gui.openGuiFor(p,"playerView", args[0]);
         }
 
 

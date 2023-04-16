@@ -68,6 +68,18 @@
             <id>recoreh-repo</id>
             <url>https://git.recorehosting.com/maven/snapshots/</url>
         </repository>
+
+        <repository>
+            <id>github-damijongerius-guimanager</id>
+            <name>GitHub Damijongerius GuiManager</name>
+            <url>https://maven.pkg.github.com/Damijongerius/GuiManager</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -76,6 +88,12 @@
             <artifactId>spigot-api</artifactId>
             <version>1.19.3-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dami</groupId>
+            <artifactId>GuiManager</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <!-- UltimateKingdom -->

@@ -1,15 +1,16 @@
-package com.me.dami.activabetterinterface.Profile.GUI;
+package com.me.dami.activabetterinterface.GUI.Handlers;
 
-import com.me.dami.activabetterinterface.Base.IOpenGui;
+import com.dami.guimanager.Gui.GuiBehavior;
+import com.dami.guimanager.Gui.GuiCreator;
+import com.dami.guimanager.Item.Items;
 import com.me.dami.activabetterinterface.Base.TextConverter;
-import com.me.dami.activabetterinterface.GUI.StaticGuiItems;
 import me.map.ultimatekingdom.api.UltimateKingdom;
 import me.map.ultimatekingdom.api.objects.KingdomPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -18,54 +19,75 @@ import org.bukkit.inventory.meta.SkullMeta;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class PlayerInfoGUI{
+public class PlayerInfoManager implements GuiBehavior {
 
-    private static int[] spacing = {0,1,2,3,4,5,6,7,8,9,11,17,18,19,20,21,22,23,24,25,26};
-
-
-    public static Inventory createInventory(Player p, String name) {
-        Inventory inv = Bukkit.createInventory(null,27,name);
-
-
-        for(int slot : spacing){
-            inv.setItem(slot , StaticGuiItems.space);
+    @Override
+    public void onInventoryClick(InventoryClickEvent e, String name) {
+        int slot = e.getSlot();
+        if(!(slot > 11) && !(slot < 17)){
+            return;
         }
 
-        inv.setItem(10,SetHead(p.getName(), p.getUniqueId(), p.getDisplayName()));
-
-        inv.setItem(12, SetKingdom(p.getUniqueId()));
-
-        inv.setItem(13, SetMedals(p.getUniqueId()));
-
-        inv.setItem(14, SetPlayTime(p.getUniqueId()));
-
-        //should be set playtime when accessable
-
-        return inv;
-    }
-
-    public static Inventory createInventory(OfflinePlayer p, String name) {
-        Inventory inv = Bukkit.createInventory(null,27,name);
-
-
-        for(int slot : spacing){
-            inv.setItem(slot , StaticGuiItems.space);
+        if(slot == 12){
+            //open kingdom menu
         }
 
-        inv.setItem(10,SetHead(p.getName(), p.getUniqueId(), p.getName()));
+        if(slot == 13){
+            //open medal menu
+        }
 
-        inv.setItem(12, SetKingdom(p.getUniqueId()));
+        if(slot == 14){
+            //open playtime top
+        }
 
-        inv.setItem(13, SetMedals(p.getUniqueId()));
+        if(slot == 16){
+            //close everything
+        }
 
-        inv.setItem(14, SetPlayTime(p.getUniqueId()));
-
-        //should be set playtime when accessable
-
-        return inv;
+        return;
     }
 
-    private static ItemStack SetHead(String _name, UUID p, String customDisplay){
+    @Override
+    public Inventory updateInventory(Inventory inventory, String name) {
+        Player p = Bukkit.getPlayer(name);
+
+        inventory.setItem(14, setPlayTime(p.getUniqueId()));
+
+        if(p.isOnline()){
+
+            inventory.setItem(10,setHead(p.getName(), p.getUniqueId(), p.getDisplayName()));
+        }
+        else{
+            inventory.setItem(10,setHead(p.getName(), p.getUniqueId(), p.getName()));
+        }
+        return null;
+    }
+
+    @Override
+    public Inventory buildInventory(String prefix, String name) {
+
+        GuiCreator creator = new GuiCreator(prefix, name, 27);
+        creator.setItems(new int[] {0,1,2,3,4,5,6,7,8,9,11,17,18,19,20,21,22,23,24,25,26}, Items.definedItems.get("space"));
+
+        Player p = Bukkit.getPlayer(name);
+        assert p != null;
+
+        creator.setItem(12, setKingdom(p.getUniqueId()));
+        creator.setItem(13, setMedals(p.getUniqueId()));
+        creator.setItem(14, setPlayTime(p.getUniqueId()));
+
+        if(p.isOnline()){
+
+            creator.setItem(10,setHead(p.getName(), p.getUniqueId(), p.getDisplayName()));
+        }
+        else{
+            creator.setItem(10,setHead(p.getName(), p.getUniqueId(), p.getName()));
+        }
+
+        return creator.buildInventory();
+    }
+
+    private static ItemStack setHead(String _name, UUID p, String customDisplay){
         ItemStack item = new ItemStack(Material.PLAYER_HEAD);
 
         SkullMeta skull = (SkullMeta) item.getItemMeta();
@@ -95,7 +117,7 @@ public class PlayerInfoGUI{
         return item;
     }
 
-    private static ItemStack SetKingdom(UUID p){
+    private static ItemStack setKingdom(UUID p){
         ItemStack item = new ItemStack(Material.SPRUCE_DOOR);
 
         ItemMeta meta = item.getItemMeta();
@@ -116,7 +138,7 @@ public class PlayerInfoGUI{
         return item;
     }
 
-    private static ItemStack SetMedals(UUID p){
+    private static ItemStack setMedals(UUID p){
         ItemStack item = new ItemStack(Material.SUNFLOWER);
 
         ItemMeta meta = item.getItemMeta();
@@ -134,7 +156,7 @@ public class PlayerInfoGUI{
         return item;
     }
 
-    private static ItemStack SetPlayTime(UUID p){
+    private static ItemStack setPlayTime(UUID p){
         ItemStack item = new ItemStack(Material.CLOCK);
 
         ItemMeta meta = item.getItemMeta();
