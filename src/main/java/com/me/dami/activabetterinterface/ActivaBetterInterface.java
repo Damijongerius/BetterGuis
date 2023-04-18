@@ -14,10 +14,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public final class ActivaBetterInterface extends JavaPlugin {
 
@@ -43,11 +40,10 @@ public final class ActivaBetterInterface extends JavaPlugin {
 
         FailedSavables = new ConfigurationManager(this,  "LostData");
 
-        getCommand("profile").setExecutor(commandManager);
-        getCommand("kprofile").setExecutor(commandManager);
-        getCommand("badge").setExecutor(commandManager);
+        Objects.requireNonNull(getCommand("profile")).setExecutor(commandManager);
+        Objects.requireNonNull(getCommand("kprofile")).setExecutor(commandManager);
+        Objects.requireNonNull(getCommand("badge")).setExecutor(commandManager);
 
-        db = new DataBase("customer_259613_coreprotect", "cDqUHpGB^7sqXMr7", "jdbc:mysql://customer_259613_coreprotect:cDqUHpGB^7sqXMr7@eu02-sql.pebblehost.com/customer_259613_coreprotect");
 
        initializeGm();
     }
