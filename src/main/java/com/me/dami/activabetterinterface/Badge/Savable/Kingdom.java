@@ -11,7 +11,8 @@ import java.util.*;
 public class Kingdom {
 
     private final String name;
-
+    private String discordCode;
+    private String description;
     private List<LinkedBadge> unSavedBadges = new ArrayList<>();
     private List<LinkedBadge> badges = new ArrayList<>();
     InsertBadge insertBadge = new InsertBadge();
@@ -32,13 +33,9 @@ public class Kingdom {
     }
 
     public void removeBadge(LinkedBadge badge){
-        if(badges.contains(badge)){
-            badges.remove(badge);
-        }
+        badges.remove(badge);
 
-        if(unSavedBadges.contains(badge)){
-            unSavedBadges.remove(badge);
-        }
+        unSavedBadges.remove(badge);
     }
 
     public Map<String,Object> saveBadges(){
@@ -60,6 +57,25 @@ public class Kingdom {
             return mapBadges;
         }
         return Collections.emptyMap();
+    }
+
+    public String getDiscordLink(){
+        return "\"https://discord.gg/\"" + discordCode;
+    }
+
+    public String getDescription(){
+        return description;
+    }
+    public void setDescription(String newDescription){
+        description = newDescription;
+    }
+
+    public String getDiscordCode(){
+        return discordCode;
+    }
+
+    public void setDiscordCode(String discordCode){
+        this.discordCode = discordCode;
     }
 
 }

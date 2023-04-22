@@ -2,6 +2,7 @@ package com.me.dami.activabetterinterface.GUI.Handlers;
 
 import com.dami.guimanager.Gui.GuiBehavior;
 import com.dami.guimanager.Gui.GuiCreator;
+import com.dami.guimanager.GuiManager;
 import com.dami.guimanager.Item.Items;
 import com.me.dami.activabetterinterface.Base.TextConverter;
 import me.map.ultimatekingdom.api.UltimateKingdom;
@@ -21,15 +22,22 @@ import java.util.UUID;
 
 public class PlayerInfoManager implements GuiBehavior {
 
+    private final GuiManager gm;
+
+    public PlayerInfoManager(GuiManager gm){
+        this.gm = gm;
+    }
     @Override
     public void onInventoryClick(InventoryClickEvent e, String name) {
         int slot = e.getSlot();
         if(!(slot > 11) && !(slot < 17)){
             return;
         }
+        Player p = (Player) e.getWhoClicked();
 
         if(slot == 12){
-            //open kingdom menu
+            p.closeInventory();
+            gm.openGuiFor(p,"kingdomView",UltimateKingdom.Players().getPlayer(p).getKingdom().getName());
         }
 
         if(slot == 13){
@@ -41,10 +49,8 @@ public class PlayerInfoManager implements GuiBehavior {
         }
 
         if(slot == 16){
-            //close everything
+            p.closeInventory();
         }
-
-        return;
     }
 
     @Override

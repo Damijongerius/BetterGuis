@@ -12,16 +12,16 @@ import java.util.List;
 import java.util.Objects;
 
 public class Saveable {
-    private List<Kingdom> kingdoms = new ArrayList<>();
+    private static List<Kingdom> kingdoms = new ArrayList<>();
 
-    private List<Player> players = new ArrayList<>();
+    private static List<Player> players = new ArrayList<>();
 
-    private List<Badge> badges = new ArrayList<>();
+    private static List<Badge> badges = new ArrayList<>();
 
-    private InsertBadge insertBadge =  new InsertBadge();
-    private DeleteBadge deleteBadge =  new DeleteBadge();
+    private static InsertBadge insertBadge =  new InsertBadge();
+    private static DeleteBadge deleteBadge =  new DeleteBadge();
 
-    public boolean addBadge(String name, String description){
+    public static boolean addBadge(String name, String description){
         try {
             int id = insertBadge.newBadge(name,description);
             badges.add(new Badge(id,name,description));
@@ -31,7 +31,7 @@ public class Saveable {
         }
     }
 
-    public void removeBadge(int id){
+    public static void removeBadge(int id){
         try {
             deleteBadge.RemoveBadge(id);
             for(Badge badge : badges){
@@ -47,7 +47,7 @@ public class Saveable {
     /**
      * @warning note that this will remove every badge with this name
      */
-    public void removeBadge(String name){
+    public static void removeBadge(String name){
         for(Badge badge : badges){
             if(Objects.equals(badge.getName(), name)){
                 try {
@@ -56,20 +56,29 @@ public class Saveable {
             }
         }
     }
-    public List<Kingdom> getKingdoms() {
+    public static List<Kingdom> getKingdoms() {
         return kingdoms;
     }
 
-    public List<Player> getPlayers() {
+    public static Kingdom getKingdom(String name){
+        for(Kingdom kd : kingdoms){
+            if(kd.getName().equals(name)){
+                return kd;
+            }
+        }
+        return null;
+    }
+
+    public static List<Player> getPlayers() {
         return players;
     }
 
-    public void setKingdoms(List<Kingdom> kingdoms) {
-        this.kingdoms = kingdoms;
+    public static void setKingdoms(List<Kingdom> _kingdoms) {
+        kingdoms = _kingdoms;
     }
 
-    public void setPlayers(List<Player> players) {
-        this.players = players;
+    public static void setPlayers(List<Player> _players) {
+        players = _players;
     }
 
     public void saveToDatabase(){

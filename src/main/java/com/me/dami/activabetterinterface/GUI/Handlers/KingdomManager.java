@@ -2,7 +2,10 @@ package com.me.dami.activabetterinterface.GUI.Handlers;
 
 import com.dami.guimanager.Gui.GuiBehavior;
 import com.dami.guimanager.Gui.GuiCreator;
+import com.dami.guimanager.GuiManager;
 import com.dami.guimanager.Item.Items;
+import com.me.dami.activabetterinterface.ActivaBetterInterface;
+import com.me.dami.activabetterinterface.Base.Saveable;
 import com.me.dami.activabetterinterface.Base.TextConverter;
 import me.map.ultimatekingdom.api.UltimateKingdom;
 import me.map.ultimatekingdom.api.objects.Kingdom;
@@ -14,30 +17,60 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 
 import java.util.*;
 
 public class KingdomManager implements GuiBehavior {
 
+    private final GuiManager gm;
+
+    public KingdomManager(GuiManager gm){
+        this.gm = gm;
+    }
 
 
     @Override
     public void onInventoryClick(InventoryClickEvent e, String name) {
         int slot = e.getSlot();
-
+        Player p = (Player) e.getWhoClicked();
+        Kingdom kd = UltimateKingdom.Kingdoms().getKingdom(name);
         switch (slot){
-            case 10 -> {}//into lead1
-            case 11 -> {}//into lead2
-            case 15 -> {}//open lijstje met advisors
-            case 16 -> {}//open lijstje met generals
-            case 28 -> {}//open ally 1
-            case 31 -> {}//open about book
-            case 37 -> {}//open ally 2
-            case 40 -> {}//open discordlink
-            case 41 -> {}//open medals
-            default -> {}
+            case 10 -> {
+                p.closeInventory();
+                gm.openGuiFor(p, "playerView", getKing(kd));
+            }//into lead1
+            case 11 -> {
+                p.closeInventory();
+                gm.openGuiFor(p, "playerView", getQueen(kd));
+            }//into lead2
+            case 28 -> {
+                p.closeInventory();
+                gm.openGuiFor(p,"kingdomView", getAlly1(kd));
+            }//open ally 1
+            case 31 -> {
+                p.closeInventory();
+                ItemStack item = new ItemStack(Material.WRITTEN_BOOK);
+                BookMeta meta = (BookMeta) item.getItemMeta();
+                assert meta != null;
+                meta.addPage(Objects.requireNonNull(Saveable.getKingdom(name)).getDescription());
+                item.setItemMeta(meta);
+                p.openBook(item);
+            }//open about book
+            case 37 -> {
+                p.closeInventory();
+                gm.openGuiFor(p,"kingdomView", getAlly2(kd));
+            }//open ally 2
+            case 40 -> {
+                p.closeInventory();
+                p.sendMessage("click this to join discord server" + Objects.requireNonNull(Saveable.getKingdom(name)).getDiscordLink());
+            }//open discordlink
+            case 41 -> {
 
-
+            }//open medals
+            default -> {
+                return;
+            }
         }
     }
 
@@ -108,6 +141,29 @@ public class KingdomManager implements GuiBehavior {
         );
     }
 
+    private static String  getKing(Kingdom kd) {
+        List<String> rolls = Arrays.asList(
+                "chief",
+                "mayor",
+                "baron",
+                "earl",
+                "duke",
+                "king",
+                "emperor"
+        );
+
+
+        for (UUID player : kd.getMemberList()) {
+            KingdomPlayer kPlayer = UltimateKingdom.getKingdomServer().Players().getPlayer(player);
+            for (String roll : rolls) {
+                if (Objects.equals(roll, kPlayer.getRank().getName())) {
+                    return kPlayer.getName();
+                }
+            }
+        }
+        return null;
+    }
+
     private static ItemStack setQueen(Kingdom kd){
         ArrayList<String> rolls = new ArrayList<>();
         rolls.add("baroness");
@@ -137,6 +193,26 @@ public class KingdomManager implements GuiBehavior {
                 Material.GOLDEN_HELMET,
                 true
         );
+    }
+
+    private static String getQueen(Kingdom kd){
+        ArrayList<String> rolls = new ArrayList<>();
+        rolls.add("baroness");
+        rolls.add("countess");
+        rolls.add("duchess");
+        rolls.add("queen");
+        rolls.add("empress");
+
+
+        for (UUID player : kd.getMemberList()) {
+            KingdomPlayer kPlayer = UltimateKingdom.getKingdomServer().Players().getPlayer(player);
+            for (String roll : rolls) {
+                if (Objects.equals(roll, kPlayer.getRankString())) {
+                    return kPlayer.getName();
+                }
+            }
+        }
+        return null;
     }
 
     private static ItemStack setKingdom(Kingdom kd){
@@ -193,11 +269,19 @@ public class KingdomManager implements GuiBehavior {
         );
     }
 
+    private static String getAlly1(Kingdom kd){
+        return null;
+    }
+
     private static ItemStack setAlly2(Kingdom kd){
         return Items.generateItem(
                 "Ally1",
                 Material.TOTEM_OF_UNDYING
         );
+    }
+
+    private static String getAlly2(Kingdom kd){
+        return null;
     }
 
     private static ItemStack setGovernment(Kingdom kd){

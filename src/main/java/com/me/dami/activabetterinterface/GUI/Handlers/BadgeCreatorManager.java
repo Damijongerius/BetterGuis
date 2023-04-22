@@ -2,7 +2,9 @@ package com.me.dami.activabetterinterface.GUI.Handlers;
 
 import com.dami.guimanager.Gui.GuiBehavior;
 import com.dami.guimanager.Gui.GuiCreator;
+import com.dami.guimanager.GuiManager;
 import com.dami.guimanager.Item.Items;
+import com.me.dami.activabetterinterface.GUI.Handlers.tinyBehaviors.BadgeName;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -11,30 +13,40 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
+import java.util.Objects;
+
 public class BadgeCreatorManager implements GuiBehavior {
+
+    public BadgeCreatorManager(){
+        this.addons.put("changeName", new BadgeName());
+    }
 
     @Override
     public void onInventoryClick(InventoryClickEvent e, String s) {
         int slot = e.getSlot();
-        if(e.getClickedInventory().getType() != InventoryType.CHEST){
+        if(Objects.requireNonNull(e.getClickedInventory()).getType() != InventoryType.CHEST){
             return;
         }
 
         if(e.getSlot() == 10){
             Player p = (Player) e.getWhoClicked();
-            ItemStack book = new ItemStack(Material.WRITABLE_BOOK);
-            BookMeta bookMeta = (BookMeta) book.getItemMeta();
-
-            // Open the book GUI for the player
-            p.openBook(book);
-            System.out.println("11");
+            if(e.getCursor() != null){
+                p.getInventory().setItem(e.getSlot(), e.getCursor());
+                e.setCurrentItem(e.getCursor());
+            }
+            return;
         }
+        e.setCancelled(true);
 
         if(e.getSlot() == 12){
-            System.out.println("12");
+            Player p = (Player) e.getWhoClicked();
+            GuiManager.getInstance().getWaiter().AddPlayerForMessage(p,"changeName","please type a new name for the badge", true);
+            return;
         }
-        if(e.getSlot() == 11){
-            System.out.println("13");
+        if(e.getSlot() == 13){
+            Player p = (Player) e.getWhoClicked();
+            GuiManager.getInstance().getWaiter().AddPlayerForMessage(p,"setDescription","please type a description for the badge", true);
+            return;
         }
     }
 
