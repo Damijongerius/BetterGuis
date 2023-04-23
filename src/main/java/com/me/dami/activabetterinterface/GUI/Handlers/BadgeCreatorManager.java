@@ -30,7 +30,7 @@ public class BadgeCreatorManager implements GuiBehavior {
 
         if(e.getSlot() == 10){
             Player p = (Player) e.getWhoClicked();
-            if(e.getCursor() != null){
+            if(e.getCursor().getType() != Material.AIR){
                 p.getInventory().setItem(e.getSlot(), e.getCursor());
                 e.setCurrentItem(e.getCursor());
             }
@@ -48,6 +48,10 @@ public class BadgeCreatorManager implements GuiBehavior {
             GuiManager.getInstance().getWaiter().AddPlayerForMessage(p,"setDescription","please type a description for the badge", true);
             return;
         }
+
+        if(e.getSlot() == 14){
+            //check  if all is filled then proceed
+        }
     }
 
     @Override
@@ -63,6 +67,7 @@ public class BadgeCreatorManager implements GuiBehavior {
         creator.setItem(10,Items.generateItem("Item Display", Material.SUNFLOWER));
         creator.setItem(12,Items.generateItem("Item DisplayName", Material.WRITABLE_BOOK));
         creator.setItem(13,Items.generateItem("Item Description",Material.WRITABLE_BOOK));
+        creator.setItem(14,Items.generateItem("Done", Material.GREEN_CANDLE));
 
         return creator.buildInventory();
     }
