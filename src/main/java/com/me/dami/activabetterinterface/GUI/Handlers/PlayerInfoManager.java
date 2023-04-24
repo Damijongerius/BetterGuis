@@ -83,7 +83,6 @@ public class PlayerInfoManager implements GuiBehavior {
         creator.setItem(14, setPlayTime(p.getUniqueId()));
 
         if(p.isOnline()){
-
             creator.setItem(10,setHead(p.getName(), p.getUniqueId(), p.getDisplayName()));
         }
         else{
@@ -97,6 +96,7 @@ public class PlayerInfoManager implements GuiBehavior {
         ItemStack item = new ItemStack(Material.PLAYER_HEAD);
 
         SkullMeta skull = (SkullMeta) item.getItemMeta();
+        assert skull != null;
 
         skull.setDisplayName(_name);
 

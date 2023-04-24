@@ -20,7 +20,6 @@ public class Saveable {
 
     private static InsertBadge insertBadge =  new InsertBadge();
     private static DeleteBadge deleteBadge =  new DeleteBadge();
-
     public static boolean addBadge(String name, String description){
         try {
             int id = insertBadge.newBadge(name,description);
@@ -43,6 +42,13 @@ public class Saveable {
         } catch (SQLException ignored) {}
     }
 
+    public static Badge getBadge(int id){
+        for(Badge badge : badges){
+            if(badge.getId() == id) return badge;
+        }
+        return null;
+    }
+
 
     /**
      * @warning note that this will remove every badge with this name
@@ -56,6 +62,7 @@ public class Saveable {
             }
         }
     }
+
     public static List<Kingdom> getKingdoms() {
         return kingdoms;
     }

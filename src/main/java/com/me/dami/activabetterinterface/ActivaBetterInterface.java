@@ -3,9 +3,7 @@ package com.me.dami.activabetterinterface;
 import com.dami.guimanager.Gui.Gui;
 import com.dami.guimanager.GuiManager;
 import com.dami.guimanager.Item.Items;
-import com.me.dami.activabetterinterface.GUI.Handlers.BadgeCreatorManager;
-import com.me.dami.activabetterinterface.GUI.Handlers.KingdomManager;
-import com.me.dami.activabetterinterface.GUI.Handlers.PlayerInfoManager;
+import com.me.dami.activabetterinterface.GUI.Handlers.*;
 import com.me.dami.activabetterinterface.Base.ConfigurationManager;
 import com.me.dami.activabetterinterface.Base.DataBase;
 import com.me.dami.activabetterinterface.Base.Saveable;
@@ -44,6 +42,7 @@ public final class ActivaBetterInterface extends JavaPlugin {
         Objects.requireNonNull(getCommand("kprofile")).setExecutor(commandManager);
         Objects.requireNonNull(getCommand("badge")).setExecutor(commandManager);
 
+        db = new DataBase("customer_259613_coreprotect", "cDqUHpGB^7sqXMr7", "jdbc:mysql://customer_259613_coreprotect:cDqUHpGB^7sqXMr7@eu02-sql.pebblehost.com/customer_259613_coreprotect");
 
        initializeGm();
     }
@@ -54,9 +53,14 @@ public final class ActivaBetterInterface extends JavaPlugin {
         staticItems.put("exit",Items.generateItem("Exit", Material.RED_CANDLE,"this is for exiting the inventory",true));
 
         List<Gui> guis = new ArrayList<>();
-        guis.add(new Gui("playerView", new PlayerInfoManager()));
-        guis.add(new Gui("kingdomView", new KingdomManager()));
+        guis.add(new Gui("playerView", new PlayerInfoManager(gm)));
+        guis.add(new Gui("kingdomView", new KingdomManager(gm)));
         guis.add(new Gui("badgeCreator", new BadgeCreatorManager()));
+        guis.add(new Gui("kingdomBadgeList", new KingdomBadgeListManager(gm)));//to show lists of kingdom badges
+        guis.add(new Gui("kingdomBadgeList-staff", new KingdomBadgeListManagerStaff()));
+        guis.add(new Gui("playerBadgeList", new PlayerBadgeList()));//to show list of player badges
+        guis.add(new Gui("playerBadgeList-staff"));
+        guis.add(new Gui("playerView-staff"));//with annotations
 
         gm.onInitialize(guis,staticItems);
 

@@ -24,6 +24,21 @@ public class Kingdom {
         return name;
     }
 
+    public List<LinkedBadge> getBadges(){
+        return this.badges;
+    }
+
+    public List<LinkedBadge> getBadges(int begin, int end){
+        List<LinkedBadge> part = new ArrayList<>();
+        for(int i = begin; i < end; i++){
+            if(badges.size() - 1 == i){
+               return part;
+            }
+            part.add(badges.get(i));
+        }
+
+        return part;
+    }
     public boolean addBadge(LinkedBadge badge){
         if(badges.contains(badge) || unSavedBadges.contains(badge)){
             return false;
