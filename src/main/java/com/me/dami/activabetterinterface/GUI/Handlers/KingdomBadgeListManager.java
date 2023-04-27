@@ -9,6 +9,7 @@ import com.me.dami.activabetterinterface.Badge.Savable.Badge;
 import com.me.dami.activabetterinterface.Badge.Savable.Kingdom;
 import com.me.dami.activabetterinterface.Badge.Savable.LinkedBadge;
 import com.me.dami.activabetterinterface.Base.Saveable;
+import com.me.dami.activabetterinterface.Base.TextConverter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -96,23 +97,8 @@ public class KingdomBadgeListManager implements GuiBehavior {
             ArrayList<String> lore = new ArrayList<>();
             lore.add("UnlockDate:" + linkedBadge.getUnlockDate());
             if(linkedBadge.getPlacement() != 0){
-                switch ( linkedBadge.getPlacement()){
-                    case 1 -> lore.add("placement: 1st");
-                    case 2 -> lore.add("placement: 2nd");
-                    case 3 -> lore.add("placement: 3rd");
-                    case 4 -> lore.add("placement: 4th");
-                    case 5 -> lore.add("placement: 5th");
-                    default -> {
-                        if(linkedBadge.getPlacement() <= 10){
-                            lore.add("placement: top 10");
-                            break;
-                        }
-                        if(linkedBadge.getPlacement() < 50){
-                            lore.add("placement: top 50");
-                            break;
-                        }
-                        lore.add("placement: 50+");
-                    }
+                if(linkedBadge.getPlacement() != 0){
+                    lore.add(TextConverter.setPlacement(linkedBadge.getPlacement()));
                 }
             }
 
