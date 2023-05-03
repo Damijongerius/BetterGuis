@@ -23,6 +23,24 @@ public class TextConverter {
         return clean;
     }
 
+    public static String setPlacement(int placement){
+        return switch ( placement){
+            case 1 -> "placement: 1st";
+            case 2 -> "placement: 2nd";
+            case 3 -> "placement: 3rd";
+            case 4 -> "placement: 4th";
+            case 5 -> "placement: 5th";
+            default -> {
+                if(placement <= 10) yield "placement: top 10";
+
+
+                if(placement < 50)yield "placement: top 50";
+
+                yield "placement: 50+";
+            }
+        };
+    }
+
     private static ChatColor GetColor(char character){
         return switch (character){
             case '0' -> ChatColor.BLACK;

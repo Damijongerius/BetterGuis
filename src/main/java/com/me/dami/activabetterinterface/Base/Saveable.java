@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Saveable {
     private static List<Kingdom> kingdoms = new ArrayList<>();
@@ -20,6 +21,15 @@ public class Saveable {
 
     private static InsertBadge insertBadge =  new InsertBadge();
     private static DeleteBadge deleteBadge =  new DeleteBadge();
+
+    public static Player getPlayer(UUID uuid){
+        for(Player p : players){
+            if(p.getUUID() == uuid){
+                return p;
+            }
+        }
+        return null;
+    }
     public static boolean addBadge(String name, String description){
         try {
             int id = insertBadge.newBadge(name,description);
