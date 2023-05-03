@@ -56,8 +56,9 @@ public final class ActivaBetterInterface extends JavaPlugin {
         guis.add(new Gui("playerView", new PlayerInfoManager(gm)));
         guis.add(new Gui("kingdomView", new KingdomManager(gm)));
         guis.add(new Gui("badgeCreator", new BadgeCreatorManager()));
+        guis.add(new Gui("badgeList"));
         guis.add(new Gui("kingdomBadgeList", new KingdomBadgeListManager(gm)));//to show lists of kingdom badges
-        guis.add(new Gui("kingdomBadgeList-staff", new KingdomBadgeListManagerStaff()));
+        guis.add(new Gui("kingdomBadgeList-staff", new KingdomBadgeListManagerStaff(gm)));
         guis.add(new Gui("playerBadgeList", new PlayerBadgeList()));//to show list of player badges
         guis.add(new Gui("playerBadgeList-staff"));
         guis.add(new Gui("playerView-staff"));//with annotations
